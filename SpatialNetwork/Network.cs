@@ -17,7 +17,7 @@ namespace SpatialNetwork
 
         public Network(string pedgeFilepath,
             string pedgeIdFieldName, string pfromNodeIdFieldName, string ptoNodeIdFieldName, string pbiDirectionalFieldName,
-            string pnodeFilepath = null, 
+            string pnodeFilepath = null,
             string pnodeIdFieldName = null, string pnodeLatFieldName = null, string pnodeLonFieldName = null)
         {
             if (pnodeFilepath != null && pnodeIdFieldName != null &&
@@ -111,6 +111,9 @@ namespace SpatialNetwork
                     }
                 }
             }
+
+            Console.WriteLine(string.Format("Successfully import {0} nodes and {1} edges.",
+                Nodes.Count, Edges.Count));
         }
 
     }
