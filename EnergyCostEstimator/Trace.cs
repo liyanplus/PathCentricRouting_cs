@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using MathNet.Numerics.LinearAlgebra;
 
 namespace EnergyCostEstimator
 {
-    struct TracePart
-    {
-        public uint EdgeId;
-        public double Cost;
-    }
-
     public struct PhysicalParas
     {
         public double MassFactor;
@@ -16,7 +11,7 @@ namespace EnergyCostEstimator
     }
 
     // trace is an alias of trajectory
-    class Trace : List<TracePart>
+    public class Trace : List<uint>
     {
         #region property
         public uint Id { get; set; }
@@ -24,6 +19,8 @@ namespace EnergyCostEstimator
         public string Name { get; set; }
 
         public PhysicalParas Paras { get; set; }
+
+        public Vector<double> Costs { get; set; }
         #endregion
 
         public Trace()

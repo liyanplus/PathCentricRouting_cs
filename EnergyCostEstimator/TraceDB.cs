@@ -2,13 +2,14 @@
 using System.IO;
 using System.Collections.Generic;
 using CsvHelper;
+using MathNet.Numerics.LinearAlgebra;
 
 namespace EnergyCostEstimator
 {
-    class TraceDB : Dictionary<uint, Trace>
+    public class TraceDB : Dictionary<uint, Trace>
     {
         #region property
-        public Dictionary<uint, List<uint>> EdgeTraceMapping { get; set; }
+        public Dictionary<uint, HashSet<uint>> EdgeTraceMapping { get; set; }
         #endregion
         public TraceDB()
         {
@@ -63,6 +64,8 @@ namespace EnergyCostEstimator
                                 Paras = traceParas[vehicleNo][traceName]
                             };
 
+                            var traceCost = new List<double>();
+
                             using (var fileReader = new StreamReader(Path.Combine(ptraceFilepath, traceDirname, traceFilename)))
                             using (var csvReader = new CsvReader(fileReader))
                             {
@@ -73,11 +76,8 @@ namespace EnergyCostEstimator
                                 {
                                     try
                                     {
-                                        t.Add(new TracePart()
-                                        {
-                                            EdgeId = Convert.ToUInt32(csvReader[pedgeIdFieldName]),
-                                            Cost = Convert.ToDouble(csvReader[pcostFieldName])
-                                        });
+                                        t.Add(Convert.ToUInt32(csvReader[pedgeIdFieldName]));
+                                        traceCost.Add(Convert.ToDouble(csvReader[pcostFieldName]));
                                     }
                                     catch (FormatException ex)
                                     {
@@ -89,13 +89,14 @@ namespace EnergyCostEstimator
 
                             if (t.Count > 4)
                             {
-                                foreach (var part in t)
+                                t.Costs = Vector<double>.Build.Dense(traceCost.ToArray());
+                                foreach (var partEdgeId in t)
                                 {
-                                    if (!EdgeTraceMapping.ContainsKey(part.EdgeId))
+                                    if (!EdgeTraceMapping.ContainsKey(partEdgeId))
                                     {
-                                        EdgeTraceMapping.Add(part.EdgeId, new List<uint>());
+                                        EdgeTraceMapping.Add(partEdgeId, new HashSet<uint>());
                                     }
-                                    EdgeTraceMapping[part.EdgeId].Add(t.Id);
+                                    EdgeTraceMapping[partEdgeId].Add(t.Id);
                                 }
                                 Add(t.Id, t);
                             }
