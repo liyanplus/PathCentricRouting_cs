@@ -5,6 +5,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpatialNetwork", "SpatialNe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnergyCostEstimator", "EnergyCostEstimator\EnergyCostEstimator.csproj", "{4602DAE7-CEB4-4F96-98CE-81BD7E0F3117}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PathSelection", "PathSelection\PathSelection.csproj", "{0293AB6B-127B-4956-9EDF-6E453981714C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinMaxHeap", "MinMaxHeap\MinMaxHeap.csproj", "{990AE8AC-6D93-4AEF-A78A-492722F9A0BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,5 +23,13 @@ Global
 		{4602DAE7-CEB4-4F96-98CE-81BD7E0F3117}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4602DAE7-CEB4-4F96-98CE-81BD7E0F3117}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4602DAE7-CEB4-4F96-98CE-81BD7E0F3117}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0293AB6B-127B-4956-9EDF-6E453981714C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0293AB6B-127B-4956-9EDF-6E453981714C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0293AB6B-127B-4956-9EDF-6E453981714C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0293AB6B-127B-4956-9EDF-6E453981714C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{990AE8AC-6D93-4AEF-A78A-492722F9A0BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{990AE8AC-6D93-4AEF-A78A-492722F9A0BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{990AE8AC-6D93-4AEF-A78A-492722F9A0BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{990AE8AC-6D93-4AEF-A78A-492722F9A0BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

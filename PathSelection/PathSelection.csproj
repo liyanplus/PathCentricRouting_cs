@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4602DAE7-CEB4-4F96-98CE-81BD7E0F3117}</ProjectGuid>
+    <ProjectGuid>{0293AB6B-127B-4956-9EDF-6E453981714C}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>EnergyCostEstimator</RootNamespace>
-    <AssemblyName>EnergyCostEstimator</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <RootNamespace>PathSelection</RootNamespace>
+    <AssemblyName>PathSelection</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -28,14 +28,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.ValueTuple">
-      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
-    </Reference>
-    <Reference Include="mscorlib" />
-    <Reference Include="CsvHelper">
-      <HintPath>..\packages\CsvHelper.12.1.2\lib\net45\CsvHelper.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="MathNet.Numerics">
       <HintPath>..\packages\MathNet.Numerics.4.7.0\lib\net461\MathNet.Numerics.dll</HintPath>
     </Reference>
@@ -44,21 +36,30 @@
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IRoutingState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Trace.cs" />
-    <Compile Include="TraceDB.cs" />
-    <Compile Include="MaxPaware.cs" />
-    <Compile Include="Scenario.cs" />
-    <Compile Include="Paware.cs" />
+    <Compile Include="RoutingStateEdge.cs" />
+    <Compile Include="RoutingStatePath.cs" />
+    <Compile Include="CandidateQueue.cs" />
+    <Compile Include="PathSelector.cs" />
+    <Compile Include="Path.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\EnergyCostEstimator\EnergyCostEstimator.csproj">
+      <Project>{4602DAE7-CEB4-4F96-98CE-81BD7E0F3117}</Project>
+      <Name>EnergyCostEstimator</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SpatialNetwork\SpatialNetwork.csproj">
       <Project>{A81630E7-1F0E-4F83-B0E8-E5DA0D803A23}</Project>
       <Name>SpatialNetwork</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MinMaxHeap\MinMaxHeap.csproj">
+      <Project>{990AE8AC-6D93-4AEF-A78A-492722F9A0BD}</Project>
+      <Name>MinMaxHeap</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
