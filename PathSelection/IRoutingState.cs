@@ -6,10 +6,13 @@ namespace PathSelection
     {
         #region property
         double Cost { get; set; }
+        IRoutingState Parent { get; set; }
+        List<uint> EdgeIDsForState { get; set; }
         #endregion
 
         #region method
         List<IRoutingState> GetNextStates();
+        bool IsGoalState();
         #endregion
     }
 }

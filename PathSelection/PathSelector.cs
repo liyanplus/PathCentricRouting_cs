@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using SpatialNetwork;
 
 namespace PathSelection
@@ -7,33 +8,47 @@ namespace PathSelection
     {
         #region property
         private CandidateQueue candidates = new CandidateQueue();
-        private Network network;
         #endregion
-        public PathSelector(Network network)
+
+        public PathSelector()
         {
-            this.network = network;
         }
 
-        public Path FindPath(uint[] porigin, uint pdestination) {
- 
-            // Initialize List of Candidate Paths
-            // Add Candidate Paths to queue
+        public Path GeneratePath(IRoutingState state)
+        {
+            Path path = new Path();
+            while(state != null)
+            {
+                for(int i = state.EdgeIDsForState.Count - 1; i >= 0; i--)
+                {
+                    path.AddFirst(state.EdgeIDsForState[i]);
+                }
+                state = state.Parent;
+            }
+            return path;
+        }
 
-            // While Stopping condition is false
+        public Path FindPath(List<IRoutingState> originStates) {
 
-                // Extract Min Cost CP
-                // Extend CP
-                // Add CP to Queue
-            Edge destination = network.Edges[pdestination];
-
-            //
-            candidates.Insert( new RoutingStateEdge());
+            // Add initial start states to Priority Queue
+            candidates.Insert(originStates);
 
             while(candidates.Count > 0)
             {
+                // Get lowest cost state
+                IRoutingState minCostRoutingState = candidates.GetNext();
 
+                // If this is the goal then we are done
+                if (minCostRoutingState.IsGoalState())
+                {
+                    // Return the path here
+                    return GeneratePath(minCostRoutingState);
+                }
+
+                candidates.Insert(minCostRoutingState.GetNextStates());
             }
 
+            // If queue is empty and we never reached the goal state, no path was possible
             Console.WriteLine("No path found");
             return null;
 

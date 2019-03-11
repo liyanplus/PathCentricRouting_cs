@@ -4,7 +4,7 @@ using MathNet.Numerics.LinearAlgebra;
 
 namespace PathSelection
 {
-    public class Path : List<uint>
+    public class Path : LinkedList<uint>
     {
         #region property
         public Vector<double> Cost { get; set; }
