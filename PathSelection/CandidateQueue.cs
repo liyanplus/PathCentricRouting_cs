@@ -8,6 +8,7 @@ namespace PathSelection
     {
         public CandidateQueue()
         {
+
         }
 
         public IRoutingState GetNext()
@@ -15,8 +16,14 @@ namespace PathSelection
             return ExtractMin().Value;
         }
 
-        public void Insert(IRoutingState pstate) { }
+        public void Insert(IRoutingState pstate)
+        {
+            Add(pstate.Cost, pstate);
+        }
 
-        public void Insert(List<IRoutingState> pstates) { }
+        public void Insert(List<IRoutingState> pstates)
+        {
+
+        }
     }
 }

@@ -16,41 +16,6 @@ namespace EnergyCostEstimator
         {
         }
 
-        public HashSet<uint> GetTracesAlongPath(List<uint> path)
-        {
-
-            // If no paths given, return empty set (No traces)
-            if (path.Count == 0)
-                return new HashSet<uint>();
-
-            HashSet<uint> result = new HashSet<uint>();
-
-            // Find traces on first path
-            EdgeTraceMapping.TryGetValue(path[0], out result);
-
-            HashSet<uint> newValues = new HashSet<uint>();
-
-            // Check for traces on remaining paths
-            for (int i=1; i<path.Count; i++)
-            {
-                // Traces found on path stored in newValues
-                bool foundValues = EdgeTraceMapping.TryGetValue(path[i], out newValues);
-
-                // If no traces found on path, then no traces returned
-                if (!foundValues)
-                {
-                    return new HashSet<uint>();
-                }
-
-                // Otherwise update result to store intersection of these traces
-                result.IntersectWith(newValues);
-            }
-
-            // return result
-            return result;
-       
-        }
-
         public TraceDB(string pparaFilepath, string ptripIdFieldName, string pmassFieldName, string pareaFieldName,
             string ptraceFilepath, string pedgeIdFieldName, string pcostFieldName)
         {

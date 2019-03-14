@@ -19,5 +19,11 @@ namespace SpatialNetwork
             ConnectedEdgesId = new List<uint>();
             Attrs = new Dictionary<string, string>();
         }
+
+        public List<uint> GetOutgoingEdges()
+        {
+            // TODO: Fill this out
+            return null;
+        }
     }
 }
